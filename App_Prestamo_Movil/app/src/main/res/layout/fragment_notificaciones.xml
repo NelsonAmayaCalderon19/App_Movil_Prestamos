@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/dia_cobro"
             android:text="@string/fecha_cobro"
-            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:textSize="23dp"
             ></TextView>
     </LinearLayout>
 
@@ -33,13 +34,6 @@
         android:layout_marginTop="40dp"
         ></androidx.recyclerview.widget.RecyclerView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action_notif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:background="@color/green"
-        app:srcCompat="@drawable/outline_add_black_24dp"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

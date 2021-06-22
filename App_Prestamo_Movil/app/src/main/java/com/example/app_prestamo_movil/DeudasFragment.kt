@@ -25,7 +25,7 @@ private const val ARG_PARAM2 = "param2"
 class DeudasFragment : Fragment() {
     lateinit var contenedorDeuda: RecyclerView
     lateinit var adapterDeuda: AdapterDeuda
-    lateinit var addPrestamo: FloatingActionButton
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -44,22 +44,14 @@ class DeudasFragment : Fragment() {
     ): View? {
         val view: View = inflater.inflate(R.layout.fragment_deudas, container, false)
         contenedorDeuda = view.findViewById(R.id.contenedorDeuda)
-        addPrestamo = view.findViewById(R.id.floating_action)
+
         val linearLayout = LinearLayoutManager(context)
         linearLayout.orientation = LinearLayoutManager.VERTICAL
         contenedorDeuda.layoutManager = linearLayout
         adapterDeuda = AdapterDeuda(context,cargarDatosFirebase(), R.id.cardDeuda)
         contenedorDeuda.adapter = adapterDeuda
-       addPrestamo.setOnClickListener{
-            irRegistrarPrestamo()
 
-        }
         return view
-    }
-
-    private fun irRegistrarPrestamo(){
-        val intent = Intent(context,PrestamoActivity::class.java);
-        startActivity(intent);
     }
 
     fun cargarDatosFirebase(): ArrayList<DeudaEntity> {

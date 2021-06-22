@@ -60,6 +60,7 @@ class ClientesFragment : Fragment() {
         addCliente.setOnClickListener{
             irRegistrarCliente()
         }
+
         return view
     }
 

@@ -12,14 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/contenedorDeuda"
         ></androidx.recyclerview.widget.RecyclerView>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:background="@color/green"
-        app:srcCompat="@drawable/outline_add_black_24dp"/>
+
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

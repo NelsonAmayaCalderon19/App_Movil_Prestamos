@@ -24,8 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="20dp">
+        android:orientation="horizontal">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,10 +45,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="35dp"
+                android:textSize="23dp"
                 android:textColor="@color/black"
                 android:id="@+id/nameClienteDeuda"
-                android:text="@string/Cliente"/>
+                android:text="@string/Cliente"
+                android:maxLines="2"/>
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout
@@ -58,26 +58,27 @@
         android:layout_gravity="center"
         android:orientation="horizontal"
         android:paddingTop="10dp">
+
         <TextView
+            android:id="@+id/concepto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/concepto"
-            android:text="@string/concepto"
-            android:textSize="25dp"
-            android:textAppearance="?attr/textAppearanceHeadline6"
             android:layout_marginLeft="20dp"
-            />
+            android:text="@string/concepto"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="25dp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
+
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textConcepto"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textConcepto"
                 android:background="@color/white"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
@@ -193,6 +194,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="date"
                 android:id="@+id/textProximo"
                 android:background="@color/white"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
@@ -223,6 +225,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textTipo"
+                android:enabled="false"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
                 android:background="@color/white"></com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>

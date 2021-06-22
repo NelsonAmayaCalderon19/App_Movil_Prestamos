@@ -2,6 +2,7 @@ package com.example.app_prestamo_movil
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -26,7 +28,7 @@ private const val ARG_PARAM2 = "param2"
 class NotificacionesFragment : Fragment() {
     lateinit var contenedorDeuda: RecyclerView
     lateinit var adapterDeuda: AdapterNotificacion
-    lateinit var addCobro: FloatingActionButton
+    lateinit var fechaActual: TextView
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -49,24 +51,41 @@ class NotificacionesFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_notificaciones, container, false)
         contenedorDeuda = view.findViewById(R.id.contenedorNotificacion)
-        addCobro = view.findViewById(R.id.floating_action_notif)
+        fechaActual = view.findViewById(R.id.dia_cobro)
         val linearLayout = LinearLayoutManager(context)
         linearLayout.orientation = LinearLayoutManager.VERTICAL
         contenedorDeuda.layoutManager = linearLayout
-        adapterDeuda = AdapterNotificacion(context,cargarDatos(), R.id.cardNotificacion)
+        val l = Locale("es", "CO")
+        val cal = Calendar.getInstance(TimeZone.getTimeZone("America/Bogota"), l)
+        fechaActual.text = ""+cal.get(Calendar.DATE)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.YEAR);
+        adapterDeuda = AdapterNotificacion(context,cargarDatosFirebase(), R.id.cardNotificacion)
         contenedorDeuda.adapter = adapterDeuda
-        addCobro.setOnClickListener{
-             irRegistrarCobro()
 
-         }
         return view
     }
 
-    private fun irRegistrarCobro(){
-        val intent = Intent(context,CobroActivity::class.java);
-        startActivity(intent);
-    }
+    fun cargarDatosFirebase(): ArrayList<DeudaEntity> {
+        val deudas = ArrayList<DeudaEntity>()
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myRef: DatabaseReference = database.getReference()
+        myRef.child("deudas").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    deudas.clear()
+                    for (data in snapshot.children) {
+                        val deuda = data.getValue(DeudaEntity::class.java)
+                        deudas.add(deuda as DeudaEntity)
+                        adapterDeuda.notifyDataSetChanged()
+                    }
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                Log.w("DeudasFragment", "Carga Cancelada", error.toException())
+            }
+        })
+        return deudas
+    }
     private fun cargarDatos(): ArrayList<DeudaEntity>{
        val deudas: ArrayList<DeudaEntity> = java.util.ArrayList<DeudaEntity>()
        deudas.add(

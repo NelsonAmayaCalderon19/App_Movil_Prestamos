@@ -49,4 +49,10 @@
     <string name="deuda">Deuda Actual</string>
     <string name="deudaRest">Deuda Restante</string>
     <string name="proximo">Proximo Cobro</string>
+    <string name="title_activity_info_deuda">InfoDeudaActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 </resources>
